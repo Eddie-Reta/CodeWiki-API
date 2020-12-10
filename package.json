@@ -1,0 +1,26 @@
+{
+  "name": "codewiki-api",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Eddie-Reta/CodeWiki-API.git"
+  },
+  "author": "Eduardo Reta Jr.",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Eddie-Reta/CodeWiki-API/issues"
+  },
+  "homepage": "https://github.com/Eddie-Reta/CodeWiki-API#readme",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "ejs": "^3.1.5",
+    "express": "^4.17.1",
+    "mongo": "^0.1.0",
+    "mongoose": "^5.11.6"
+  }
+}
