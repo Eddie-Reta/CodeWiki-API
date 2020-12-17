@@ -63,7 +63,8 @@ const Article = mongoose.model("article", articleSchema);
 
 app.route("/articles")
 
-    .get(function(req, res){
+    .get(
+        function(req, res){
         Article.find(function(err, foundArticles){
                     if (err) {
                         console.log(err);
@@ -73,7 +74,8 @@ app.route("/articles")
                 });
     })
 
-    .post(function(req, res){
+    .post(
+        function(req, res){
             console.log(req.body.title);
             console.log(req.body.content);
         
@@ -91,7 +93,8 @@ app.route("/articles")
             });
     })
 
-    .delete(function(req, res){
+    .delete(
+        function(req, res){
         Article.deleteMany(function(err){
                     if (!err) {
                         res.send("Articles are deleted.");
@@ -105,7 +108,8 @@ app.route("/articles")
 
 app.route("/articles/:articleTitle")
 
-.get(function(req, res){
+.get(
+    function(req, res){
 
    // const articleTitle = req.params.articleTitle;
 
@@ -118,12 +122,52 @@ app.route("/articles/:articleTitle")
     });
 })
 
-.post(function(req, res){
-
+.put(
+    function(req, res){
+        Article.update(
+            {title: req.params.articleTitle},
+            {title: req.body.title, content: req.body.content},
+            {overwrite: true},
+            function(err){
+                res.send("Successfully updated article.");
+            }
+        );
 })
 
-.delete(function(req, res){
+.patch(
+    function(req,res){
+        Article.update(
+            {title: req.params.articleTitle},
+            {$set: req.body},
+            function(err) {
+                if (!err) {
+                    res.send("Successfully updated article.");
+                }
+            }
+        )
+    }
+)
 
+.delete(
+    function(req, res){
+
+        Article.deleteOne(
+            {title: req.params.articleTitle}, 
+            function(err){
+                if(!err) {
+                    res.send("Successfully deleted article.");
+                } else {
+                    console.log(err)
+                }
+            });
+
+        // Article.findByIdAndDelete(
+        //     {_id: req.params._id}, 
+        //     function(err){
+        //         if (!err) {
+        //             res.send("Successfully deleted article.")
+        //         }
+        //     })
 });
 
 app.listen(3000, function(){
